@@ -127,7 +127,7 @@ T* QueueLinked<T>::dequeue()
 		delete head;
 	}
 	
-	sz--;
+	sze--;
 
     return item;
 }
