@@ -1,3 +1,6 @@
+/*
+	Cong Tuan Nguyen && Adam Rucker
+*/	
 #include "RombergIntegration.h"
 #include "RecursiveIntegration.h"
 #include "QueueLinked.h"
@@ -11,27 +14,20 @@ double RombergIntegration::accurateRomberg(MultiVarFunction* f, double a, double
 {
    Double* db;  //use this variable to place and retrieve values on the queue
    
-   QueueLinked<Double>* q1 =
-   QueueLinked<Double>* q2 =
+   QueueLinked<Double>* q1 = new QueueLinked<Double>();
+   QueueLinked<Double>* q2 = new QueueLinked<Double>();
 
 
    int counter = 0;
    int n = 1;  //current number of intervals
-   while (                     )
+   while (counter<= level)
    {
       //DO THIS
       //obtain the required number of trapezoid evaluations depending on the number of levels requested
       //put all of the level 0 results on the q1
-
-
-
-
-
-
-
-
-
-
+	  double value = RecursiveIntegration::romberg(f, a, b, n);
+	  db = new Double(value);
+	  q1->enqueue(db);
       n = 2*n;  //double the number of intervals
       counter++;
    }
@@ -45,28 +41,39 @@ double RombergIntegration::accurateRomberg(MultiVarFunction* f, double a, double
    //the total number of executions of the loop is ??
 
    //DO THIS
-   int iterations =                //can be precomputed
+   int iterations = 0;               //can be precomputed
+   for(int i =1; i <= level;i++)
+   {
+	   iterations += i;
+   }
    while (iterations > 0)
    {
       //DO THIS
       //use the algorithm described in the lab to improve the accuracy of your level 0 results
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	  factor = pow(4, power);
+	  if(!(q1->isEmpty()))
+	  {
+		  Double* one = q1->dequeue();
+		  Double* secondDb = q1->peek();
+		  if(secondDb == NULL)
+		  {
+			  delete one;
+			  while(!(q2->isEmpty()))
+			  {
+				db = q2->dequeue();
+				q1->enqueue(db);
+			  }
+			  power++;
+			  continue;
+		  }
+		  double x = ((factor* secondDb)-one)/(factor-1);
+		  db = new Double(x);
+		  q2->enqueue(db);
+		  delete one;
+	  }
+	  
+	 
+	  
 
 
       iterations--;
@@ -82,3 +89,4 @@ double RombergIntegration::accurateRomberg(MultiVarFunction* f, double a, double
 
    return result;
 }
+
