@@ -66,7 +66,7 @@ double RombergIntegration::accurateRomberg(MultiVarFunction* f, double a, double
 			  power++;
 			  continue;
 		  }
-		  double x = ((factor* secondDb)-one)/(factor-1);
+		  double x = ((factor* secondDb->getValue())-one->getValue())/(factor-1);
 		  db = new Double(x);
 		  q2->enqueue(db);
 		  delete one;
