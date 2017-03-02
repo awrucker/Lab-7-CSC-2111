@@ -90,7 +90,8 @@ void QueueLinked<T>::enqueue(T* item)
 	{
 		back = node;
 		node->setNext(node);
-	}else
+	}
+	else
 	{
 		NextNode<T>* prev = back;
 		back = node;
