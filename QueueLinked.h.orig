@@ -86,6 +86,16 @@ void QueueLinked<T>::enqueue(T* item)
     NextNode<T>* node = new NextNode<T>(item);
 
     //DO THIS (enqueueing the first item is a special case)
+<<<<<<< HEAD
+	
+
+
+
+
+
+
+
+=======
 	if(isEmpty())
 	{
 		back = node;
@@ -97,6 +107,7 @@ void QueueLinked<T>::enqueue(T* item)
 		node->setNext(prev->getNext());
 		prev->setNext(node);
 	}
+>>>>>>> 7495cb839234332d72edaaa945e4e7be26b18e47
     sze++;
 }
 
