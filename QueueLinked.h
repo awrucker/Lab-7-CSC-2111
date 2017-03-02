@@ -86,15 +86,17 @@ void QueueLinked<T>::enqueue(T* item)
     NextNode<T>* node = new NextNode<T>(item);
 
     //DO THIS (enqueueing the first item is a special case)
-
-
-
-
-
-
-
-
-
+	if(isEmpty())
+	{
+		back = node;
+		node->setNext(node);
+	}else
+	{
+		NextNode<T>* prev = back;
+		back = node;
+		node->setNext(prev->getNext());
+		prev->setNext(node);
+	}
     sze++;
 }
 
