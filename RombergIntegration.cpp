@@ -6,7 +6,8 @@
 #include "QueueLinked.h"
 #include "Double.h"
 using CSC2110::Double;
-
+#include <iostream>
+using namespace std;
 #include <math.h>
 
 //a is the lower limit and b is the upper limit
@@ -26,6 +27,7 @@ double RombergIntegration::accurateRomberg(MultiVarFunction* f, double a, double
       //obtain the required number of trapezoid evaluations depending on the number of levels requested
       //put all of the level 0 results on the q1
 	  double value = RecursiveIntegration::romberg(f, a, b, n);
+	  //cout<<value<<endl;
 	  db = new Double(value);
 	  q1->enqueue(db);
       n = 2*n;  //double the number of intervals
@@ -58,6 +60,11 @@ double RombergIntegration::accurateRomberg(MultiVarFunction* f, double a, double
 		  if(secondDb == NULL)
 		  {
 			  delete one;
+			  while(!(q1->isEmpty()))
+			  {
+				  one = q1->dequeue();
+				  delete one;
+			  }
 			  while(!(q2->isEmpty()))
 			  {
 				db = q2->dequeue();
@@ -67,6 +74,7 @@ double RombergIntegration::accurateRomberg(MultiVarFunction* f, double a, double
 			  continue;
 		  }
 		  double x = ((factor* secondDb->getValue())-one->getValue())/(factor-1);
+		  //cout<<power << " " <<x<<endl;
 		  db = new Double(x);
 		  q2->enqueue(db);
 		  delete one;
@@ -78,12 +86,31 @@ double RombergIntegration::accurateRomberg(MultiVarFunction* f, double a, double
 
       iterations--;
    }
-
+   Double* one;
+   if(!q2->isEmpty())
+   {
+	while(!(q1->isEmpty()))
+			  {
+				  one = q1->dequeue();
+				  delete one;
+			  }
+	while(!q2->isEmpty())
+	{
+		one = q2->dequeue();	
+		q1->enqueue(one);
+	}
+   }
    //obtain the final answer
    db = q1->dequeue();
-   double result = db->getValue();  
+   while(!q1->isEmpty())
+   {
+	   one = q1->dequeue();
+	   delete one;
+   }
+   double result = db->getValue();
+  // cout<<q1->isEmpty()<<endl;
+   //cout<<q2->isEmpty()<<endl;
    delete db;
-
    delete q1;
    delete q2;
 
