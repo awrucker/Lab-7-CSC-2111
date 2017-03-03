@@ -57,27 +57,53 @@ double RombergIntegration::accurateRomberg(MultiVarFunction* f, double a, double
 		  Double* secondDb = q1->peek();
 		  if(secondDb == NULL)
 		  {
-			  delete one;
-			  while(!(q2->isEmpty()))
-			  {
-				db = q2->dequeue();
-				q1->enqueue(db);
-			  }
-			  power++;
-			  continue;
-		  }
-		  double x = ((factor* secondDb->getValue())-one->getValue())/(factor-1);
-		  db = new Double(x);
-		  q2->enqueue(db);
-		  delete one;
-	  }
-	  
-	 
-	  
+				delete one;
+				while(!(q1->isEmpty()))
+				{
+					one = q1->dequeue();
+					delete one;
+				}
+				while(!(q2->isEmpty()))
+				{
+					db = q2->dequeue();
+					q1->enqueue(db);
+				}
+				power++;
+				continue;
+			}
+			double x = ((factor* secondDb->getValue())-one->getValue())/(factor-1);
+			db = new Double(x);
+			q2->enqueue(db);
+			delete one;
+		}
+	iterations--;
+	}
+	
+	Double* one;
 
+	if (!(q2->isEmpty()))
+	{
+		while(!(q1->isEmpty()))
+		{
+			one = q1->dequeue();
+			delete one;
+		}
+		
+		while(!(q2->isEmpty()))
+		{
+			db = q2->dequeue();
+			q1->enqueue(db);
+		}
+	}
+	  
+	db = q1->dequeue();
+	
+	while (!q1->isEmpty())
+	{
+		one = q1->dequeue();
+		delete one;
+	}
 
-      iterations--;
-   }
 
    //obtain the final answer
    db = q1->dequeue();
