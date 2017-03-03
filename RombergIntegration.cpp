@@ -1,5 +1,7 @@
 /*
 	Cong Tuan Nguyen && Adam Rucker
+	3/3/2017
+	Lab 7/ RombergIntegration Lab
 */	
 #include "RombergIntegration.h"
 #include "RecursiveIntegration.h"
