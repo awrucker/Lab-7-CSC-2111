@@ -1,3 +1,8 @@
+/*
+	Cong Tuan Nguyen && Adam Rucker
+	3/3/2017
+	Lab 7/ RombergIntegration Lab
+*/	
 #if !defined (QUEUELINKED_H)
 #define QUEUELINKED_H
 
