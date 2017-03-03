@@ -12,13 +12,36 @@ class QueueLinked
       int sze;
 
    public:
+	/*destructor & constructor*/
+		//pre: takes nothing, initialize back & size
+		//post: returns nothing
       QueueLinked();
+		
+		//pre: takes nothing, delete all
+		//post: returns nothing
       ~QueueLinked();
+		
+	/*methods*/
+		//pre: takes nothing, check if size is empty
+		//post: returns size
       bool isEmpty();
+		
+		//pre: takes nothing
+		//post: returns size
       int size();
+		
       void dequeueAll(); 
+		
+		//pre: takes nothing
+		//post: returns item at start of queue
       T* peek();
+		
+		//pre: takes nothing
+		//post: gets item and remove it from queue
       T* dequeue();
+		
+		//pre: takes item parameter
+		//post: adds item to queue
       void enqueue(T* item);
 
 };

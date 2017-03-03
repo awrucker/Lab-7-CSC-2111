@@ -59,6 +59,7 @@ double RombergIntegration::accurateRomberg(MultiVarFunction* f, double a, double
 		  Double* secondDb = q1->peek();
 		  if(secondDb == NULL)
 		  {
+				delete one;
 			  delete one;
 			  while(!(q1->isEmpty()))
 			  {
