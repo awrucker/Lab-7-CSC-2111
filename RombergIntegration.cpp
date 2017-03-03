@@ -8,6 +8,8 @@
 #include "QueueLinked.h"
 #include "Double.h"
 using CSC2110::Double;
+#include <iostream>
+using namespace std;
 #include <math.h>
 
 //a is the lower limit and b is the upper limit
@@ -59,7 +61,6 @@ double RombergIntegration::accurateRomberg(MultiVarFunction* f, double a, double
 		  Double* secondDb = q1->peek();
 		  if(secondDb == NULL)
 		  {
-				delete one;
 			  delete one;
 			  while(!(q1->isEmpty()))
 			  {
@@ -117,4 +118,3 @@ double RombergIntegration::accurateRomberg(MultiVarFunction* f, double a, double
 
    return result;
 }
-
