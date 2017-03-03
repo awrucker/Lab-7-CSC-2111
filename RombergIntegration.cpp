@@ -8,8 +8,6 @@
 #include "QueueLinked.h"
 #include "Double.h"
 using CSC2110::Double;
-#include <iostream>
-using namespace std;
 #include <math.h>
 
 //a is the lower limit and b is the upper limit
